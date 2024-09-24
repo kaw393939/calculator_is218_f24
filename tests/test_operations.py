@@ -1,6 +1,6 @@
 ''' My Calculator Test'''
 import pytest
-from app.opperations import addition, division, multiplication, subtraction
+from app.operations import addition, division, multiplication, subtraction
 
 
 # Parameterized test for addition
