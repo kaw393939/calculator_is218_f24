@@ -1,5 +1,11 @@
+from typing import Union
+
+# Define a type alias for numbers (both int and float)
+
+Number = Union[int, float]
+
 # addition function 
-def addition(a, b):
+def addition(a: Number, b: Number) -> Number:
     """
     This function takes two numbers as arguments and returns their sum.
     
@@ -16,7 +22,7 @@ def addition(a, b):
     return a + b  # Return the sum of a and b
 
 # subtraction function
-def subtraction(a, b):
+def subtraction(a: Number, b: Number) -> Number:
     """
     This function takes two numbers as arguments and returns the result of subtracting b from a.
     
@@ -32,7 +38,7 @@ def subtraction(a, b):
     """
     return a - b  # Return the result of a minus b
 
-def multiplication(a, b):
+def multiplication(a: Number, b: Number) -> Number:
     """
     This function takes two numbers as arguments and returns their product.
     
@@ -48,7 +54,7 @@ def multiplication(a, b):
     """
     return a * b  # Return the product of a and b
 
-def division(a, b):
+def division(a: Number, b: Number) -> Number:
     """
     This function takes two numbers as arguments and returns the result of dividing a by b.
     

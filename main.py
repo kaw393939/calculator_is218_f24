@@ -78,7 +78,7 @@ Available commands:
                 # Instantiate the appropriate calculation class from the `operations_map`.
                 # This leverages the Strategy Pattern to dynamically decide which calculation to perform
                 # based on the user's input (e.g., Addition, Subtraction, etc.).
-                calculation = operations_map[operation](a, b)
+                calculation = operations_map[operation].create(a, b)
 
                 # Call the `compute` method to perform the calculation and store the result.
                 result = calculation.compute()
