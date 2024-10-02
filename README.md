@@ -13,6 +13,8 @@ Youtube Videos Up Until this point
 
 Here’s a comprehensive list of all the programming and testing concepts demonstrated in the provided calculator program. I've included both small and large concepts to ensure nothing is left out.  Match the code with the concept below in the powerpoint, you should show the code and the concept in the powerpoint slide.
 
+Review the Refactor GURU catalog of patterns: https://refactoring.guru/design-patterns/catalog
+
 ### Programming Concepts
 
 1. **Modular Programming**: Functions and classes are organized into separate modules (`app.operations`, `app.calculation`), promoting code reusability and separation of concerns.
