@@ -1,66 +1,55 @@
-# Importing necessary functions from the app.operations module
-# These functions (addition, subtraction, multiplication, division) perform the core arithmetic operations.
-from app.operations import addition, subtraction, multiplication, division
+from typing import List, Union
+from app.history_manager import HistoryManager, OperationCommand
+from app.operations import Number
 
-# Defining the Calculator class which acts as an interface to perform arithmetic operations.
+
 class Calculator:
+    """
+    The Calculator class ties together operations and their history.
+    
+    This class allows performing operations, managing the operation history, and undoing actions.
 
-    @classmethod
-    def create(cls):
-        """
-        Factory Method: This method provides a way to instantiate the Calculator class.
-        Using a class method here allows us to follow the Factory Method pattern, 
-        which can be beneficial if additional setup or subclassing is needed in the future.
-        """
-        return cls()  # Returns an instance of the Calculator class.
+    Attributes:
+    history_manager (HistoryManager): Manages the history of operations.
+    """
 
-    def add(self, a, b):
-        """
-        Add Method: This method performs the addition of two numbers.
-        
-        Arguments:
-        a -- the first number (float or int)
-        b -- the second number (float or int)
-        
-        The method calls the external addition function imported from app.operations.
-        This keeps the core functionality modular and reusable.
-        """
-        return addition(a, b)  # Delegates the addition to the addition function.
+    def __init__(self) -> None:
+        """Initializes the Calculator with a history manager."""
+        self.history_manager = HistoryManager()
 
-    def subtract(self, a, b):
+    def perform_operation(self, operation: 'Calculation') -> Number:
         """
-        Subtract Method: This method performs the subtraction of two numbers.
-        
-        Arguments:
-        a -- the first number (float or int)
-        b -- the second number (float or int)
-        
-        The method calls the external subtraction function imported from app.operations.
-        """
-        return subtraction(a, b)  # Delegates the subtraction to the subtraction function.
+        Perform the calculation and store it in history.
 
-    def multiply(self, a, b):
-        """
-        Multiply Method: This method performs the multiplication of two numbers.
-        
-        Arguments:
-        a -- the first number (float or int)
-        b -- the second number (float or int)
-        
-        The method calls the external multiplication function imported from app.operations.
-        """
-        return multiplication(a, b)  # Delegates the multiplication to the multiplication function.
+        Args:
+        operation (Calculation): The calculation to perform.
 
-    def divide(self, a, b):
+        Returns:
+        Number: The result of the calculation.
         """
-        Divide Method: This method performs the division of two numbers.
-        
-        Arguments:
-        a -- the first number (float or int)
-        b -- the second number (float or int)
-        
-        The method calls the external division function imported from app.operations.
-        It may need additional error handling for cases like division by zero, 
-        which can be handled at the operation level.
+        command = OperationCommand(operation)
+        result = command.execute()
+        self.history_manager.add_to_history(command)
+        return result
+
+    def get_history(self) -> List['OperationCommand']:
         """
-        return division(a, b)  # Delegates the division to the division function.
+        Get the full history of performed operations.
+
+        Returns:
+        List[OperationCommand]: The list of all performed operations.
+        """
+        return self.history_manager.get_full_history()
+
+    def undo(self) -> Union['OperationCommand', None]:
+        """
+        Undo the last operation.
+
+        Returns:
+        Union[OperationCommand, None]: The last operation that was undone, or None if history is empty.
+        """
+        return self.history_manager.undo_last()
+
+    def clear_history(self) -> None:
+        """Clear the entire calculator history."""
+        self.history_manager.clear_history()
