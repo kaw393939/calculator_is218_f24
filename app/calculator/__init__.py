@@ -1,4 +1,5 @@
 from typing import List, Union
+from app.calculation import Calculation
 from app.history_manager import HistoryManager, OperationCommand
 from app.operations import Number
 
